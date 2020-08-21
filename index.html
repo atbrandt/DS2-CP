@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dark Souls II Character Planner</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/main.js"></script>
+</head>
+
+<body onload="populateTable(classDefaults), populateDropdown(), updateValues('all')">
+    <div class="wrapper">
+        <div class="column">
+            <div class="inputbar">
+                <div class="header">
+                    <label for="Class selection" class="headtext">Class Select</label>
+                    <div class="inputzone">
+                        <div class="flexspace"><a href="javascript:resetValues()">Reset</a></div>
+                        <select id="classselect" class="dropdown" onchange="populateInputs(options[value].text)"></select>
+                        <div class="headtext flexspace">Best Class</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="headtext">SLV</div>
+                    <div class="inputzone">
+                        <div class="flexspace"></div>
+                        <span id="slv" class="statbox"></span>
+                        <div class="flexspace"></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="headtext">VGR</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('vgr')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="vgr" tabindex="1" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('vgr')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">END</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('end')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="end" tabindex="2" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('end')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">VIT</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('vit')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="vit" tabindex="3" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('vit')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">ATN</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('atn')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="atn" tabindex="4" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('atn')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">STR</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('str')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="str" tabindex="5" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('str')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">DEX</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('dex')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="dex" tabindex="6" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('dex')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">ADP</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('adp')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="adp" tabindex="7" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('adp')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">INT</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('int')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="int" tabindex="8" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('int')" />
+                    </form>
+                </div>
+                <div class="column">
+                    <div class="headtext">FTH</div>
+                    <form class="inputzone">
+                        <img src="img/arrowu.png" alt="UP" height="15" width="20" onclick="increment('fth')" />
+                        <input type="number" class="defvalue" value="1" min="0" max="99" onkeyup="updateValues(id)" onchange="updateValues(id)" id="fth" tabindex="9" />
+                        <img src="img/arrowd.png" alt="DN" height="15" width="20" onclick="decrement('fth')" />
+                    </form>
+                </div>
+            </div>
+            <div class="classdetails">
+                <table>
+                    <tbody id="classtable">
+                        <tr id="bestclass"></tr>
+                    </tbody>
+                </table>
+                <a id="showtable" href="javascript:hideshow(document.getElementsByClassName('hidden'))">Show Table</a>
+                <hr />
+            </div>
+            <div class="statdetails">
+                <div class="column">
+                    <div class="statrow">
+                        <span class="headtext">Max HP</span><span id="hp" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Stamina</span><span id="stam" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Stamina Regen</span><span id="stamregen" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Max Burden</span><span id="maxburden" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Current Burden</span><span id="curburden" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Attune Slots</span><span id="atnslots" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Cast Speed</span><span id="castspd" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Strength Bonus</span><span id="strbns" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Dexterity Bonus</span><span id="dexbns" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Magic Bonus</span><span id="magicdmg" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Fire Bonus</span><span id="firedmg" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Lightning Bonus</span><span id="ltndmg" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Dark Bonus</span><span id="darkdmg" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Poison Bonus</span><span id="psndmg" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Bleed Bonus</span><span id="blddmg" class="statbox"></span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="statrow">
+                        <span class="headtext">Physical Defense</span><span id="physdef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Strike Defense</span><span id="strikedef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Slash Defense</span><span id="slashdef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Thrust Defense</span><span id="thrustdef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Magic Defense</span><span id="magicdef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Fire Defense</span><span id="firedef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Lightning Defense</span><span id="ltndef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Dark Defense</span><span id="darkdef" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Poison Resist</span><span id="psnres" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Bleed Resist</span><span id="bldres" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Petrify Resist</span><span id="petres" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Curse Resist</span><span id="crsres" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Agility</span><span id="agility" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Poise</span><span id="poise" class="statbox"></span>
+                    </div>
+                    <div class="statrow">
+                        <span class="headtext">Guard Break</span><span id="guardbrk" class="statbox"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
