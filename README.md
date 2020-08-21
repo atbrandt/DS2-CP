@@ -1,1 +1,1 @@
-# Dark-Souls-II-Character-Planner
+# Dark Souls II Character Planner
